@@ -4,7 +4,25 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "home",
-    component: () => import("@/views/HomeView.vue"),
+    redirect: { name: "stats-chart" },
+  },
+  {
+    path: "/stats",
+    name: "stats",
+    component: () => import("@/views/stats/StatsView.vue"),
+    redirect: { name: "stats-chart" },
+    children: [
+      {
+        path: "chart",
+        name: "stats-chart",
+        component: () => import("@/views/stats/StatsChartView.vue"),
+      },
+      {
+        path: "table",
+        name: "stats-table",
+        component: () => import("@/views/stats/StatsTableView.vue"),
+      },
+    ],
   },
 ];
 
